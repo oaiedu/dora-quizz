@@ -205,7 +205,7 @@
           <div class="scenario">
             <div class="row">
               <h3>{{ currentNumber }}. {{ current.title }}</h3>
-              <div class="pill">{{ current.id }}</div>
+              <div class="pill scenario-id">{{ current.id }}</div>
             </div>
             <p>{{ current.text }}</p>
             <div class="choices">
@@ -595,8 +595,6 @@ function restart() {
 
 .wrap{
   max-width:1200px;
-  margin:20px auto;
-  padding:24px;
   position:relative;
   z-index:1;
 }
@@ -606,6 +604,8 @@ header{display:flex;gap:24px;align-items:flex-start;justify-content:space-betwee
 .grid{display:grid;grid-template-columns:380px 1fr;gap:32px;align-items:start}
 @media (max-width: 1024px){
   .grid{grid-template-columns:1fr;gap:24px}
+  .grid > aside{order:2}
+  .grid > main{order:1}
 }
 .card{background:linear-gradient(145deg,rgba(15,23,42,0.7) 0%,rgba(30,41,59,0.6) 100%);backdrop-filter:blur(20px);border:1px solid rgba(59,130,246,0.3);border-radius:24px;padding:28px;box-shadow:0 8px 32px rgba(59,130,246,0.2)}
 .status-header{margin-bottom:24px}
@@ -696,6 +696,7 @@ button.choice div{
   z-index:1;
 }
 .pill{font-size:16px;font-weight:600;padding:12px 24px;border-radius:24px;border:2px solid rgba(255,255,255,.25);color:#ffffff;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);text-transform:uppercase;letter-spacing:0.5px}
+.pill.scenario-id{font-size:10px;padding:6px 12px;border-radius:12px}
 .row{display:flex;align-items:center;justify-content:space-between}
 .footer{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1)}
 .meta{font-size:13px;color:#ffffff;font-weight:500}
@@ -729,7 +730,7 @@ button.choice div{
 .log::-webkit-scrollbar-thumb{background:rgba(148,163,184,0.3);border-radius:3px}
 .log::-webkit-scrollbar-thumb:hover{background:rgba(148,163,184,0.5)}
 .impact{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.score{font-size:28px;font-weight:800}
+.score{font-size:28px;font-weight:800;color:#ffffff}
 .center{display:flex;align-items:center;justify-content:center;text-align:center}
 .restart{all:unset;background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(16,185,129,0.2));border:2px solid rgba(255,255,255,0.2);padding:14px 20px;border-radius:12px;color:#ffffff;cursor:pointer;font-weight:600;transition:all 0.3s ease}
 
@@ -737,7 +738,7 @@ button.choice div{
 .feedback{margin-top:24px;padding:24px;border-radius:20px;background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(59,130,246,0.12));border:2px solid rgba(16,185,129,0.4);animation:slideIn 0.5s ease-out;box-shadow:0 8px 25px rgba(16,185,129,0.1);backdrop-filter:blur(15px)}
 @keyframes slideIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 .list{margin-top:8px;display:grid;gap:6px}
-.list .item{display:flex;justify-content:space-between;align-items:center;background:#0b1222;border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:10px}
+.list .item{display:flex;justify-content:space-between;align-items:center;background:#0b1222;border:1px solid rgba(255,255,255,.08);padding:10px;border-radius:10px;color:#ffffff}
 
 /* Intro Screen Styles */
 .intro-screen{
@@ -754,18 +755,18 @@ button.choice div{
   backdrop-filter:blur(20px);
   border:1px solid rgba(59,130,246,0.3);
   border-radius:24px;
-  padding:20px;
+  padding:16px 20px;
   box-shadow:0 20px 60px rgba(59,130,246,0.2);
 }
 
-.intro-header{text-align:center;margin-bottom:16px}
+.intro-header{text-align:center;margin-bottom:12px}
 .intro-title{font-size:36px;font-weight:800;margin:0;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1}
 .intro-subtitle{font-size:16px;color:#94a3b8;margin:4px 0 0 0;font-weight:500}
 
-.intro-description{text-align:center;margin-bottom:18px}
+.intro-description{text-align:center;margin-bottom:14px}
 .intro-description p{font-size:18px;color:#ffffff;line-height:1.6;margin:0}
 
-.metrics-explanation{margin-bottom:18px}
+.metrics-explanation{margin-bottom:14px}
 .metrics-explanation h2{font-size:20px;color:#ffffff;margin:0 0 10px 0;text-align:center}
 .metrics-explanation > p{font-size:14px;color:#cbd5e1;text-align:center;margin:0 0 14px 0;line-height:1.4}
 
