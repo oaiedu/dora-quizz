@@ -15,8 +15,8 @@
     <div class="scenarios-section">
       <h2>📋 Current Scenarios ({{ scenarios.length }})</h2>
       <div class="scenarios-grid">
-        <div 
-          v-for="(scenario, index) in scenarios" 
+        <div
+          v-for="(scenario, index) in scenarios"
           :key="scenario.id"
           class="scenario-card"
           @click="editScenario(index)"
@@ -47,30 +47,30 @@
               <h3>Basic Information</h3>
               <div class="form-group">
                 <label for="scenario-id">ID (unique identifier)</label>
-                <input 
+                <input
                   id="scenario-id"
-                  v-model="currentScenario.id" 
-                  type="text" 
-                  placeholder="e.g., prod-incident" 
+                  v-model="currentScenario.id"
+                  type="text"
+                  placeholder="e.g., prod-incident"
                   required
                 />
               </div>
               <div class="form-group">
                 <label for="scenario-title">Title</label>
-                <input 
+                <input
                   id="scenario-title"
-                  v-model="currentScenario.title" 
-                  type="text" 
-                  placeholder="e.g., Production incident (Sunday 03:00)" 
+                  v-model="currentScenario.title"
+                  type="text"
+                  placeholder="e.g., Production incident (Sunday 03:00)"
                   required
                 />
               </div>
               <div class="form-group">
                 <label for="scenario-text">Description</label>
-                <textarea 
+                <textarea
                   id="scenario-text"
-                  v-model="currentScenario.text" 
-                  placeholder="Describe the situation..." 
+                  v-model="currentScenario.text"
+                  placeholder="Describe the situation..."
                   rows="3"
                   required
                 ></textarea>
@@ -82,7 +82,7 @@
               <div class="choices-header">
                 <h3>Choices ({{ currentScenario.choices.length }})</h3>
                 <div class="choice-tabs">
-                  <button 
+                  <button
                     type="button"
                     class="tab-btn devops-tab"
                     :class="{ active: activeChoiceTab === 'devops' }"
@@ -90,7 +90,7 @@
                   >
                     🚀 DevOps Approach
                   </button>
-                  <button 
+                  <button
                     type="button"
                     class="tab-btn traditional-tab"
                     :class="{ active: activeChoiceTab === 'traditional' }"
@@ -104,34 +104,31 @@
               <div class="choices-container">
                 <div class="choices-grid">
                   <!-- DevOps Choices Column (shown only when DevOps tab is active) -->
-                  <div 
-                    class="choice-column devops-column"
-                    v-if="activeChoiceTab === 'devops'"
-                  >
+                  <div v-if="activeChoiceTab === 'devops'" class="choice-column devops-column">
                     <div class="column-header">
                       <h4>🚀 DevOps Choices</h4>
-                      <button 
-                        type="button" 
-                        class="add-choice-btn devops-btn" 
-                        @click="addChoice('devops')"
+                      <button
                         v-if="currentScenario.choices.length < 4"
+                        type="button"
+                        class="add-choice-btn devops-btn"
+                        @click="addChoice('devops')"
                       >
                         + Add DevOps Choice
                       </button>
                     </div>
-                    
-                    <div 
-                      v-for="(choice, index) in devopsChoices" 
+
+                    <div
+                      v-for="(choice, index) in devopsChoices"
                       :key="'devops-' + index"
                       class="choice-editor devops-choice"
                     >
                       <div class="choice-header">
                         <span class="choice-badge devops-badge">DevOps</span>
-                        <button 
-                          type="button" 
-                          class="remove-choice-btn" 
-                          @click="removeChoice(choice.originalIndex)"
+                        <button
                           v-if="currentScenario.choices.length > 2"
+                          type="button"
+                          class="remove-choice-btn"
+                          @click="removeChoice(choice.originalIndex)"
                         >
                           ✕
                         </button>
@@ -139,10 +136,10 @@
 
                       <div class="form-group">
                         <label :for="`choice-${choice.originalIndex}-label`">Choice Text</label>
-                        <textarea 
+                        <textarea
                           :id="`choice-${choice.originalIndex}-label`"
-                          v-model="choice.label" 
-                          placeholder="Describe the DevOps approach..." 
+                          v-model="choice.label"
+                          placeholder="Describe the DevOps approach..."
                           rows="2"
                           required
                         ></textarea>
@@ -150,10 +147,10 @@
 
                       <div class="form-group">
                         <label :for="`choice-${choice.originalIndex}-note`">Explanation</label>
-                        <textarea 
+                        <textarea
                           :id="`choice-${choice.originalIndex}-note`"
-                          v-model="choice.note" 
-                          placeholder="Why this DevOps choice matters..." 
+                          v-model="choice.note"
+                          placeholder="Why this DevOps choice matters..."
                           rows="2"
                           required
                         ></textarea>
@@ -165,67 +162,67 @@
                         <div class="impact-grid-compact">
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-sat`">Satisfaction</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-sat`"
-                              v-model.number="choice.impact.sat" 
-                              type="number" 
-                              min="-50" 
-                              max="50" 
+                              v-model.number="choice.impact.sat"
+                              type="number"
+                              min="-50"
+                              max="50"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-burn`">Burnout</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-burn`"
-                              v-model.number="choice.impact.burn" 
-                              type="number" 
-                              min="-50" 
-                              max="50" 
+                              v-model.number="choice.impact.burn"
+                              type="number"
+                              min="-50"
+                              max="50"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-lead`">Lead Time</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-lead`"
-                              v-model.number="choice.impact.lead" 
-                              type="number" 
-                              min="-30" 
-                              max="30" 
+                              v-model.number="choice.impact.lead"
+                              type="number"
+                              min="-30"
+                              max="30"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-mttr`">MTTR</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-mttr`"
-                              v-model.number="choice.impact.mttr" 
-                              type="number" 
-                              min="-30" 
-                              max="30" 
+                              v-model.number="choice.impact.mttr"
+                              type="number"
+                              min="-30"
+                              max="30"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-cfr`">CFR</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-cfr`"
-                              v-model.number="choice.impact.cfr" 
-                              type="number" 
-                              min="-50" 
-                              max="50" 
+                              v-model.number="choice.impact.cfr"
+                              type="number"
+                              min="-50"
+                              max="50"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-cost`">Cost</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-cost`"
-                              v-model.number="choice.impact.cost" 
-                              type="number" 
-                              min="-100" 
-                              max="100" 
+                              v-model.number="choice.impact.cost"
+                              type="number"
+                              min="-100"
+                              max="100"
                               step="5"
                             />
                           </div>
@@ -233,36 +230,36 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <!-- Traditional Choices Column (shown only when Traditional tab is active) -->
-                  <div 
-                    class="choice-column traditional-column"
+                  <div
                     v-if="activeChoiceTab === 'traditional'"
+                    class="choice-column traditional-column"
                   >
                     <div class="column-header">
                       <h4>🏢 Traditional Choices</h4>
-                      <button 
-                        type="button" 
-                        class="add-choice-btn traditional-btn" 
-                        @click="addChoice('nodevops')"
+                      <button
                         v-if="currentScenario.choices.length < 4"
+                        type="button"
+                        class="add-choice-btn traditional-btn"
+                        @click="addChoice('nodevops')"
                       >
                         + Add Traditional Choice
                       </button>
                     </div>
-                    
-                    <div 
-                      v-for="(choice, index) in traditionalChoices" 
+
+                    <div
+                      v-for="(choice, index) in traditionalChoices"
                       :key="'traditional-' + index"
                       class="choice-editor traditional-choice"
                     >
                       <div class="choice-header">
                         <span class="choice-badge traditional-badge">Traditional</span>
-                        <button 
-                          type="button" 
-                          class="remove-choice-btn" 
-                          @click="removeChoice(choice.originalIndex)"
+                        <button
                           v-if="currentScenario.choices.length > 2"
+                          type="button"
+                          class="remove-choice-btn"
+                          @click="removeChoice(choice.originalIndex)"
                         >
                           ✕
                         </button>
@@ -270,10 +267,10 @@
 
                       <div class="form-group">
                         <label :for="`choice-${choice.originalIndex}-label`">Choice Text</label>
-                        <textarea 
+                        <textarea
                           :id="`choice-${choice.originalIndex}-label`"
-                          v-model="choice.label" 
-                          placeholder="Describe the traditional approach..." 
+                          v-model="choice.label"
+                          placeholder="Describe the traditional approach..."
                           rows="2"
                           required
                         ></textarea>
@@ -281,10 +278,10 @@
 
                       <div class="form-group">
                         <label :for="`choice-${choice.originalIndex}-note`">Explanation</label>
-                        <textarea 
+                        <textarea
                           :id="`choice-${choice.originalIndex}-note`"
-                          v-model="choice.note" 
-                          placeholder="Why this traditional choice matters..." 
+                          v-model="choice.note"
+                          placeholder="Why this traditional choice matters..."
                           rows="2"
                           required
                         ></textarea>
@@ -296,67 +293,67 @@
                         <div class="impact-grid-compact">
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-sat`">Satisfaction</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-sat`"
-                              v-model.number="choice.impact.sat" 
-                              type="number" 
-                              min="-50" 
-                              max="50" 
+                              v-model.number="choice.impact.sat"
+                              type="number"
+                              min="-50"
+                              max="50"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-burn`">Burnout</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-burn`"
-                              v-model.number="choice.impact.burn" 
-                              type="number" 
-                              min="-50" 
-                              max="50" 
+                              v-model.number="choice.impact.burn"
+                              type="number"
+                              min="-50"
+                              max="50"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-lead`">Lead Time</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-lead`"
-                              v-model.number="choice.impact.lead" 
-                              type="number" 
-                              min="-30" 
-                              max="30" 
+                              v-model.number="choice.impact.lead"
+                              type="number"
+                              min="-30"
+                              max="30"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-mttr`">MTTR</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-mttr`"
-                              v-model.number="choice.impact.mttr" 
-                              type="number" 
-                              min="-30" 
-                              max="30" 
+                              v-model.number="choice.impact.mttr"
+                              type="number"
+                              min="-30"
+                              max="30"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-cfr`">CFR</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-cfr`"
-                              v-model.number="choice.impact.cfr" 
-                              type="number" 
-                              min="-50" 
-                              max="50" 
+                              v-model.number="choice.impact.cfr"
+                              type="number"
+                              min="-50"
+                              max="50"
                               step="1"
                             />
                           </div>
                           <div class="impact-item">
                             <label :for="`choice-${choice.originalIndex}-cost`">Cost</label>
-                            <input 
+                            <input
                               :id="`choice-${choice.originalIndex}-cost`"
-                              v-model.number="choice.impact.cost" 
-                              type="number" 
-                              min="-100" 
-                              max="100" 
+                              v-model.number="choice.impact.cost"
+                              type="number"
+                              min="-100"
+                              max="100"
                               step="5"
                             />
                           </div>
@@ -371,7 +368,9 @@
             <!-- Actions -->
             <div class="form-actions">
               <button type="button" class="btn-secondary" @click="closeEditor">Cancel</button>
-              <button type="submit" class="btn-primary">{{ isEditMode ? 'Update' : 'Create' }} Scenario</button>
+              <button type="submit" class="btn-primary">
+                {{ isEditMode ? 'Update' : 'Create' }} Scenario
+              </button>
             </div>
           </form>
         </div>
@@ -388,9 +387,9 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="import-json">Paste JSON data:</label>
-            <textarea 
+            <textarea
               id="import-json"
-              v-model="importJson" 
+              v-model="importJson"
               placeholder="Paste your scenarios JSON here..."
               rows="10"
               class="json-textarea"
@@ -415,7 +414,8 @@
 import { ref, reactive, computed } from 'vue'
 
 // Utility function to generate unique IDs
-const generateId = (prefix = 'field') => `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+const _generateId = (prefix = 'field') =>
+  `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
 
 // Default scenarios (same as the game)
 const defaultScenarios = [
@@ -424,39 +424,39 @@ const defaultScenarios = [
     title: 'Production incident (Sunday 03:00)',
     text: 'The payments API returns 500. No runbooks or alerts are configured.',
     choices: [
-      { 
-        label: 'Page on-call and document a post‑mortem runbook', 
-        tag: 'devops', 
-        impact: { mttr: -4, burn: 5, cost: 10, sat: -5, cfr: -5 }, 
-        note: 'Improves MTTR and prevents repeat failures, but adds some cost and load.' 
+      {
+        label: 'Page on-call and document a post‑mortem runbook',
+        tag: 'devops',
+        impact: { mttr: -4, burn: 5, cost: 10, sat: -5, cfr: -5 },
+        note: 'Improves MTTR and prevents repeat failures, but adds some cost and load.',
       },
-      { 
-        label: 'Hotfix quickly without documenting', 
-        tag: 'nodevops', 
-        impact: { mttr: -1, burn: 2, sat: -8, cfr: 8 }, 
-        note: 'Fast but fragile; increases CFR and hurts satisfaction.' 
-      }
-    ]
+      {
+        label: 'Hotfix quickly without documenting',
+        tag: 'nodevops',
+        impact: { mttr: -1, burn: 2, sat: -8, cfr: 8 },
+        note: 'Fast but fragile; increases CFR and hurts satisfaction.',
+      },
+    ],
   },
   {
     id: 'qa-backlog',
     title: 'QA backlog delays releases',
     text: 'Manual testing takes days and blocks releases.',
     choices: [
-      { 
-        label: 'Introduce automated tests and a minimal coverage gate', 
-        tag: 'devops', 
-        impact: { lead: -3, cfr: -6, cost: 15, burn: -4, sat: 6 }, 
-        note: 'Fewer failures and shorter lead time with an upfront investment.' 
+      {
+        label: 'Introduce automated tests and a minimal coverage gate',
+        tag: 'devops',
+        impact: { lead: -3, cfr: -6, cost: 15, burn: -4, sat: 6 },
+        note: 'Fewer failures and shorter lead time with an upfront investment.',
       },
-      { 
-        label: 'Ask QA for overtime', 
-        tag: 'nodevops', 
-        impact: { lead: -1, burn: 12, sat: -4, cfr: 3 }, 
-        note: 'Buys some time at the cost of burnout and more failures.' 
-      }
-    ]
-  }
+      {
+        label: 'Ask QA for overtime',
+        tag: 'nodevops',
+        impact: { lead: -1, burn: 12, sat: -4, cfr: 3 },
+        note: 'Buys some time at the cost of burnout and more failures.',
+      },
+    ],
+  },
 ]
 
 // State
@@ -474,7 +474,7 @@ const currentScenario = reactive({
   id: '',
   title: '',
   text: '',
-  choices: []
+  choices: [],
 })
 
 // Methods
@@ -496,10 +496,7 @@ function resetCurrentScenario() {
   currentScenario.id = ''
   currentScenario.title = ''
   currentScenario.text = ''
-  currentScenario.choices = [
-    createEmptyChoice('devops'),
-    createEmptyChoice('nodevops')
-  ]
+  currentScenario.choices = [createEmptyChoice('devops'), createEmptyChoice('nodevops')]
 }
 
 function createEmptyChoice(tag = 'devops') {
@@ -507,7 +504,7 @@ function createEmptyChoice(tag = 'devops') {
     label: '',
     tag,
     impact: { sat: 0, burn: 0, lead: 0, mttr: 0, cfr: 0, cost: 0 },
-    note: ''
+    note: '',
   }
 }
 
@@ -533,7 +530,7 @@ function saveScenario() {
   }
 
   // Check for duplicate ID (only if creating new or changing ID)
-  const existingIndex = scenarios.value.findIndex(s => s.id === currentScenario.id)
+  const existingIndex = scenarios.value.findIndex((s) => s.id === currentScenario.id)
   if (existingIndex !== -1 && (!isEditMode.value || existingIndex !== editingIndex.value)) {
     showMessage('Scenario ID already exists', 'error')
     return
@@ -550,7 +547,7 @@ function saveScenario() {
 
   // Save
   const scenarioData = JSON.parse(JSON.stringify(currentScenario))
-  
+
   if (isEditMode.value) {
     scenarios.value[editingIndex.value] = scenarioData
     showMessage('Scenario updated successfully!', 'success')
@@ -601,7 +598,7 @@ function closeImportModal() {
 function processImport() {
   try {
     const importedData = JSON.parse(importJson.value)
-    
+
     if (!Array.isArray(importedData)) {
       throw new Error('JSON must be an array of scenarios')
     }
@@ -649,13 +646,13 @@ function loadFromLocalStorage() {
 const devopsChoices = computed(() => {
   return currentScenario.choices
     .map((choice, index) => ({ ...choice, originalIndex: index }))
-    .filter(choice => choice.tag === 'devops')
+    .filter((choice) => choice.tag === 'devops')
 })
 
 const traditionalChoices = computed(() => {
   return currentScenario.choices
     .map((choice, index) => ({ ...choice, originalIndex: index }))
-    .filter(choice => choice.tag === 'nodevops')
+    .filter((choice) => choice.tag === 'nodevops')
 })
 
 // Initialize
@@ -809,7 +806,8 @@ loadFromLocalStorage()
   padding: 20px;
 }
 
-.editor-modal, .import-modal {
+.editor-modal,
+.import-modal {
   background: white;
   border-radius: 12px;
   padding: 24px;
@@ -937,12 +935,14 @@ loadFromLocalStorage()
   border-top: 1px solid #eee;
 }
 
-.impact-section h4, .impact-section h5 {
+.impact-section h4,
+.impact-section h5 {
   margin: 0 0 16px 0;
   font-size: 16px;
 }
 
-.impact-grid, .impact-grid-compact {
+.impact-grid,
+.impact-grid-compact {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
@@ -1094,20 +1094,20 @@ loadFromLocalStorage()
   .wrap {
     padding: 16px;
   }
-  
+
   .header-actions {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .scenarios-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .choices-grid {
     grid-template-columns: 1fr;
   }

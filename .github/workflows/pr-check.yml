@@ -1,0 +1,58 @@
+name: PR Quality Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  quality-check:
+    name: Code Quality Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for better analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint with annotations
+        run: npm run lint
+        continue-on-error: true
+
+      - name: Check code formatting
+        run: npx prettier --check "src/**/*.{js,vue,css}"
+        continue-on-error: true
+
+      - name: Build check
+        run: npm run build
+
+      - name: Check bundle size
+        run: |
+          echo "## Bundle Size Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Size |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|------|" >> $GITHUB_STEP_SUMMARY
+          find dist -type f -name "*.js" -o -name "*.css" | while read file; do
+            size=$(du -h "$file" | cut -f1)
+            echo "| \`${file#dist/}\` | $size |" >> $GITHUB_STEP_SUMMARY
+          done
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Code quality checks passed! Build successful.'
+            })

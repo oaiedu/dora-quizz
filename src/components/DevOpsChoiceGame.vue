@@ -9,13 +9,19 @@
         </div>
 
         <div class="intro-description">
-          <p>Make decisions like a CTO and observe how they affect <strong>DORA metrics</strong>, team well-being, and operational costs.</p>
+          <p>
+            Make decisions like a CTO and observe how they affect <strong>DORA metrics</strong>,
+            team well-being, and operational costs.
+          </p>
         </div>
 
         <div class="metrics-explanation">
           <h2>📊 What are DORA Metrics?</h2>
-          <p>The 4 key metrics identified by DORA research to measure software delivery and operational performance:</p>
-          
+          <p>
+            The 4 key metrics identified by DORA research to measure software delivery and
+            operational performance:
+          </p>
+
           <div class="metric-cards">
             <div class="metric-card dora-metric">
               <div class="metric-icon">🚀</div>
@@ -31,7 +37,7 @@
               <div class="metric-info">
                 <h3>Lead Time for Changes</h3>
                 <p>Time from code commit to production deployment</p>
-                <div class="metric-range">🎯 Elite: < 1 day</div>
+                <div class="metric-range">🎯 Elite: &lt; 1 day</div>
               </div>
             </div>
 
@@ -40,7 +46,7 @@
               <div class="metric-info">
                 <h3>Change Failure Rate</h3>
                 <p>Percentage of deployments that cause production failures</p>
-                <div class="metric-range">🎯 Elite: < 15%</div>
+                <div class="metric-range">🎯 Elite: &lt; 15%</div>
               </div>
             </div>
 
@@ -49,7 +55,7 @@
               <div class="metric-info">
                 <h3>Mean Time to Recovery</h3>
                 <p>Average time to recover from a production failure</p>
-                <div class="metric-range">🎯 Elite: < 1 hour</div>
+                <div class="metric-range">🎯 Elite: &lt; 1 hour</div>
               </div>
             </div>
           </div>
@@ -113,7 +119,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="modal-footer">
               <button class="scenario-manager-btn" @click="goToScenarioManager">
                 ⚙️ Edit Questions & Scenarios
@@ -129,7 +135,10 @@
       <header>
         <div>
           <div class="title">DevOps Choice Game – Prototype</div>
-          <div class="subtitle">Make CTO-style decisions. See how your choices affect delivery speed, stability and team well‑being.</div>
+          <div class="subtitle">
+            Make CTO-style decisions. See how your choices affect delivery speed, stability and team
+            well‑being.
+          </div>
         </div>
         <div class="chips">
           <span class="chip">MTTR = Mean Time To Recover</span>
@@ -138,107 +147,131 @@
         </div>
       </header>
 
-    <div class="grid">
-      <aside class="card">
-        <div class="status-header">
-          <h3>Performance Dashboard</h3>
-        </div>
-        <div class="kpis">
-          <div class="kpi">
-            <h4>Customer Satisfaction</h4>
-            <div class="val">{{ fmt(state.sat) }}</div>
-            <div class="bar"><span :style="{ width: state.sat + '%' }" /></div>
+      <div class="grid">
+        <aside class="card">
+          <div class="status-header">
+            <h3>Performance Dashboard</h3>
           </div>
-          <div class="kpi">
-            <h4>Team Burnout</h4>
-            <div class="val">{{ fmt(state.burn) }}</div>
-            <div class="bar"><span :style="{ width: state.burn + '%' }" /></div>
-          </div>
-          <div class="kpi">
-            <h4>Lead Time (days)</h4>
-            <div class="val">{{ fmt(state.lead) }}</div>
-            <div class="bar"><span :style="{ width: invLeadBar + '%' }" /></div>
-          </div>
-          <div class="kpi">
-            <h4>MTTR (hours)</h4>
-            <div class="val">{{ fmt(state.mttr) }}</div>
-            <div class="bar"><span :style="{ width: invMttrBar + '%' }" /></div>
-          </div>
-          <div class="kpi">
-            <h4>CFR (%)</h4>
-            <div class="val">{{ fmt(state.cfr) }}%</div>
-            <div class="bar"><span :style="{ width: (100 - state.cfr) + '%' }" /></div>
-          </div>
-          <div class="kpi">
-            <h4>Operating Cost</h4>
-            <div class="val">{{ fmt(state.cost) }}</div>
-            <div class="bar"><span :style="{ width: invCostBar + '%' }" /></div>
-          </div>
-        </div>
-        <div class="log">
-          <p v-for="(entry, i) in logTop" :key="i" v-html="entry"></p>
-        </div>
-      </aside>
-
-      <main class="card">
-        <div v-if="isFinished" class="center" style="min-height:420px;flex-direction:column;gap:12px">
-          <div class="score">Final score: {{ fmt(score) }} / 100</div>
-          <div class="small">(Higher is better. Based on DORA + well‑being + cost)</div>
-          <div class="kpis" style="max-width:560px;margin-top:8px">
-            <div class="kpi"><h4>Customer Satisfaction</h4><div class="val">{{ fmt(state.sat) }}</div></div>
-            <div class="kpi"><h4>Team Burnout</h4><div class="val">{{ fmt(state.burn) }}</div></div>
-            <div class="kpi"><h4>Lead Time (days)</h4><div class="val">{{ fmt(state.lead) }}</div></div>
-            <div class="kpi"><h4>MTTR (h)</h4><div class="val">{{ fmt(state.mttr) }}</div></div>
-            <div class="kpi"><h4>CFR (%)</h4><div class="val">{{ fmt(state.cfr) }}%</div></div>
-            <div class="kpi"><h4>Cost</h4><div class="val">{{ fmt(state.cost) }}</div></div>
-          </div>
-          <div class="list">
-            <div class="item" v-for="(p, i) in state.picks" :key="i">
-              <div>{{ p.idx + 1 }}. {{ p.title }}</div>
-              <div class="pill" :class="p.align==='DevOps' ? 'tag-devops' : 'tag-nodevops'">{{ p.align }}</div>
+          <div class="kpis">
+            <div class="kpi">
+              <h4>Customer Satisfaction</h4>
+              <div class="val">{{ fmt(state.sat) }}</div>
+              <div class="bar"><span :style="{ width: state.sat + '%' }" /></div>
+            </div>
+            <div class="kpi">
+              <h4>Team Burnout</h4>
+              <div class="val">{{ fmt(state.burn) }}</div>
+              <div class="bar"><span :style="{ width: state.burn + '%' }" /></div>
+            </div>
+            <div class="kpi">
+              <h4>Lead Time (days)</h4>
+              <div class="val">{{ fmt(state.lead) }}</div>
+              <div class="bar"><span :style="{ width: invLeadBar + '%' }" /></div>
+            </div>
+            <div class="kpi">
+              <h4>MTTR (hours)</h4>
+              <div class="val">{{ fmt(state.mttr) }}</div>
+              <div class="bar"><span :style="{ width: invMttrBar + '%' }" /></div>
+            </div>
+            <div class="kpi">
+              <h4>CFR (%)</h4>
+              <div class="val">{{ fmt(state.cfr) }}%</div>
+              <div class="bar"><span :style="{ width: 100 - state.cfr + '%' }" /></div>
+            </div>
+            <div class="kpi">
+              <h4>Operating Cost</h4>
+              <div class="val">{{ fmt(state.cost) }}</div>
+              <div class="bar"><span :style="{ width: invCostBar + '%' }" /></div>
             </div>
           </div>
-          <div class="chips">
-            <span class="chip">Tip: prioritize small batches, automation and observability.</span>
-            <span class="chip">Next: extend scenarios via JSON.</span>
+          <div class="log">
+            <p v-for="(entry, i) in logTop" :key="i" v-html="entry"></p>
           </div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="restart" @click="restart">Play again</button>
-          </div>
-        </div>
+        </aside>
 
-        <template v-else>
-          <div class="scenario">
-            <div class="row">
-              <h3>{{ currentNumber }}. {{ current.title }}</h3>
-              <div class="pill scenario-id">{{ current.id }}</div>
+        <main class="card">
+          <div
+            v-if="isFinished"
+            class="center"
+            style="min-height: 420px; flex-direction: column; gap: 12px"
+          >
+            <div class="score">Final score: {{ fmt(score) }} / 100</div>
+            <div class="small">(Higher is better. Based on DORA + well‑being + cost)</div>
+            <div class="kpis" style="max-width: 560px; margin-top: 8px">
+              <div class="kpi">
+                <h4>Customer Satisfaction</h4>
+                <div class="val">{{ fmt(state.sat) }}</div>
+              </div>
+              <div class="kpi">
+                <h4>Team Burnout</h4>
+                <div class="val">{{ fmt(state.burn) }}</div>
+              </div>
+              <div class="kpi">
+                <h4>Lead Time (days)</h4>
+                <div class="val">{{ fmt(state.lead) }}</div>
+              </div>
+              <div class="kpi">
+                <h4>MTTR (h)</h4>
+                <div class="val">{{ fmt(state.mttr) }}</div>
+              </div>
+              <div class="kpi">
+                <h4>CFR (%)</h4>
+                <div class="val">{{ fmt(state.cfr) }}%</div>
+              </div>
+              <div class="kpi">
+                <h4>Cost</h4>
+                <div class="val">{{ fmt(state.cost) }}</div>
+              </div>
             </div>
-            <p>{{ current.text }}</p>
-            <div class="choices">
-              <button
-                class="choice"
-                v-for="(c,i) in current.choices"
-                :key="i"
-                :class="{
-                  'selected': choiceMade && selectedChoiceIndex === i,
-                  'not-selected': choiceMade && selectedChoiceIndex !== i
-                }"
-                :disabled="choiceMade"
-                @click="onChoose(i)"
-              >
-                <div>
-                  <div style="font-weight:600">{{ c.label }}</div>
+            <div class="list">
+              <div v-for="(p, i) in state.picks" :key="i" class="item">
+                <div>{{ p.idx + 1 }}. {{ p.title }}</div>
+                <div class="pill" :class="p.align === 'DevOps' ? 'tag-devops' : 'tag-nodevops'">
+                  {{ p.align }}
                 </div>
-              </button>
+              </div>
             </div>
-            <div class="footer">
-              <div class="meta">Scenario {{ currentNumber }} of {{ scenarios.length }}</div>
-              <button class="next" :disabled="!choiceMade" @click="goNext">Next →</button>
+            <div class="chips">
+              <span class="chip">Tip: prioritize small batches, automation and observability.</span>
+              <span class="chip">Next: extend scenarios via JSON.</span>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 8px">
+              <button class="restart" @click="restart">Play again</button>
             </div>
           </div>
-        </template>
-      </main>
-    </div>
+
+          <template v-else>
+            <div class="scenario">
+              <div class="row">
+                <h3>{{ currentNumber }}. {{ current.title }}</h3>
+                <div class="pill scenario-id">{{ current.id }}</div>
+              </div>
+              <p>{{ current.text }}</p>
+              <div class="choices">
+                <button
+                  v-for="(c, i) in current.choices"
+                  :key="i"
+                  class="choice"
+                  :class="{
+                    selected: choiceMade && selectedChoiceIndex === i,
+                    'not-selected': choiceMade && selectedChoiceIndex !== i,
+                  }"
+                  :disabled="choiceMade"
+                  @click="onChoose(i)"
+                >
+                  <div>
+                    <div style="font-weight: 600">{{ c.label }}</div>
+                  </div>
+                </button>
+              </div>
+              <div class="footer">
+                <div class="meta">Scenario {{ currentNumber }} of {{ scenarios.length }}</div>
+                <button class="next" :disabled="!choiceMade" @click="goNext">Next →</button>
+              </div>
+            </div>
+          </template>
+        </main>
+      </div>
     </div>
 
     <!-- Impact Modal -->
@@ -253,7 +286,16 @@
             <h3>Your Decision:</h3>
             <div class="choice-text">{{ currentImpact.choice }}</div>
             <div class="choice-alignment">
-              <span class="pill" :class="currentImpact.align === 'DevOps' ? 'tag-devops' : currentImpact.align === 'Hybrid' ? 'tag-mixed' : 'tag-nodevops'">
+              <span
+                class="pill"
+                :class="
+                  currentImpact.align === 'DevOps'
+                    ? 'tag-devops'
+                    : currentImpact.align === 'Hybrid'
+                      ? 'tag-mixed'
+                      : 'tag-nodevops'
+                "
+              >
                 {{ currentImpact.align }} Approach
               </span>
             </div>
@@ -269,37 +311,56 @@
             <div class="impact-grid">
               <div v-if="currentImpact.impact?.sat" class="impact-item">
                 <span class="metric-name">Customer Satisfaction</span>
-                <span class="impact-value" :class="currentImpact.impact.sat > 0 ? 'positive' : 'negative'">
+                <span
+                  class="impact-value"
+                  :class="currentImpact.impact.sat > 0 ? 'positive' : 'negative'"
+                >
                   {{ currentImpact.impact.sat > 0 ? '+' : '' }}{{ currentImpact.impact.sat }}
                 </span>
               </div>
               <div v-if="currentImpact.impact?.burn" class="impact-item">
                 <span class="metric-name">Team Burnout</span>
-                <span class="impact-value" :class="currentImpact.impact.burn < 0 ? 'positive' : 'negative'">
+                <span
+                  class="impact-value"
+                  :class="currentImpact.impact.burn < 0 ? 'positive' : 'negative'"
+                >
                   {{ currentImpact.impact.burn > 0 ? '+' : '' }}{{ currentImpact.impact.burn }}
                 </span>
               </div>
               <div v-if="currentImpact.impact?.lead" class="impact-item">
                 <span class="metric-name">Lead Time</span>
-                <span class="impact-value" :class="currentImpact.impact.lead < 0 ? 'positive' : 'negative'">
+                <span
+                  class="impact-value"
+                  :class="currentImpact.impact.lead < 0 ? 'positive' : 'negative'"
+                >
                   {{ currentImpact.impact.lead > 0 ? '+' : '' }}{{ currentImpact.impact.lead }} days
                 </span>
               </div>
               <div v-if="currentImpact.impact?.mttr" class="impact-item">
                 <span class="metric-name">MTTR</span>
-                <span class="impact-value" :class="currentImpact.impact.mttr < 0 ? 'positive' : 'negative'">
-                  {{ currentImpact.impact.mttr > 0 ? '+' : '' }}{{ currentImpact.impact.mttr }} hours
+                <span
+                  class="impact-value"
+                  :class="currentImpact.impact.mttr < 0 ? 'positive' : 'negative'"
+                >
+                  {{ currentImpact.impact.mttr > 0 ? '+' : ''
+                  }}{{ currentImpact.impact.mttr }} hours
                 </span>
               </div>
               <div v-if="currentImpact.impact?.cfr" class="impact-item">
                 <span class="metric-name">Change Failure Rate</span>
-                <span class="impact-value" :class="currentImpact.impact.cfr < 0 ? 'positive' : 'negative'">
+                <span
+                  class="impact-value"
+                  :class="currentImpact.impact.cfr < 0 ? 'positive' : 'negative'"
+                >
                   {{ currentImpact.impact.cfr > 0 ? '+' : '' }}{{ currentImpact.impact.cfr }}%
                 </span>
               </div>
               <div v-if="currentImpact.impact?.cost" class="impact-item">
                 <span class="metric-name">Operating Cost</span>
-                <span class="impact-value" :class="currentImpact.impact.cost < 0 ? 'positive' : 'negative'">
+                <span
+                  class="impact-value"
+                  :class="currentImpact.impact.cost < 0 ? 'positive' : 'negative'"
+                >
                   {{ currentImpact.impact.cost > 0 ? '+' : '' }}{{ currentImpact.impact.cost }}
                 </span>
               </div>
@@ -330,101 +391,251 @@ const defaultScenarios = [
     title: 'Security vulnerability discovered in production',
     text: 'A critical SQL injection vulnerability is found in your user authentication system. Customer data may be at risk.',
     choices: [
-      { label: 'Immediately take the system offline for emergency patching', tag: 'nodevops', impact: { mttr: -2, cfr: +15, sat: -12, cost: +25, burn: +8 }, note: 'Secure but causes major downtime and customer frustration.' },
-      { label: 'Deploy automated security scanning in CI/CD pipeline', tag: 'devops', impact: { lead: +1, cfr: -8, cost: +18, sat: +3, burn: -2 }, note: 'Prevents future issues with systematic approach.' },
-      { label: 'Apply hotfix during maintenance window', tag: 'mixed', impact: { mttr: +2, cfr: -3, sat: -4, cost: +8, burn: +3 }, note: 'Balanced approach but leaves window of vulnerability.' }
-    ]
+      {
+        label: 'Immediately take the system offline for emergency patching',
+        tag: 'nodevops',
+        impact: { mttr: -2, cfr: +15, sat: -12, cost: +25, burn: +8 },
+        note: 'Secure but causes major downtime and customer frustration.',
+      },
+      {
+        label: 'Deploy automated security scanning in CI/CD pipeline',
+        tag: 'devops',
+        impact: { lead: +1, cfr: -8, cost: +18, sat: +3, burn: -2 },
+        note: 'Prevents future issues with systematic approach.',
+      },
+      {
+        label: 'Apply hotfix during maintenance window',
+        tag: 'mixed',
+        impact: { mttr: +2, cfr: -3, sat: -4, cost: +8, burn: +3 },
+        note: 'Balanced approach but leaves window of vulnerability.',
+      },
+    ],
   },
   {
     id: 'database-performance',
     title: 'Database performance degrading under load',
     text: 'Response times are increasing during peak hours. Some queries timeout after 30 seconds.',
     choices: [
-      { label: 'Scale vertically by upgrading server hardware', tag: 'nodevops', impact: { mttr: -1, lead: +1, cost: +35, sat: +2, burn: +1 }, note: 'Quick fix but expensive and not sustainable.' },
-      { label: 'Implement database sharding strategy', tag: 'devops', impact: { lead: +4, cfr: +5, cost: +28, sat: -3, burn: +6 }, note: 'Long-term solution but complex implementation.' },
-      { label: 'Add caching layer and optimize queries', tag: 'devops', impact: { mttr: -2, lead: -1, cfr: -4, cost: +12, sat: +5, burn: -1 }, note: 'Improves performance with manageable complexity.' }
-    ]
+      {
+        label: 'Scale vertically by upgrading server hardware',
+        tag: 'nodevops',
+        impact: { mttr: -1, lead: +1, cost: +35, sat: +2, burn: +1 },
+        note: 'Quick fix but expensive and not sustainable.',
+      },
+      {
+        label: 'Implement database sharding strategy',
+        tag: 'devops',
+        impact: { lead: +4, cfr: +5, cost: +28, sat: -3, burn: +6 },
+        note: 'Long-term solution but complex implementation.',
+      },
+      {
+        label: 'Add caching layer and optimize queries',
+        tag: 'devops',
+        impact: { mttr: -2, lead: -1, cfr: -4, cost: +12, sat: +5, burn: -1 },
+        note: 'Improves performance with manageable complexity.',
+      },
+    ],
   },
   {
     id: 'legacy-migration',
     title: 'Legacy system blocking new features',
     text: 'A 10-year-old monolith handles payments. Adding new payment methods requires weeks of changes.',
     choices: [
-      { label: 'Continue extending the monolith with workarounds', tag: 'nodevops', impact: { lead: +5, cfr: +8, sat: -6, burn: +5, cost: -5 }, note: 'Cheaper short-term but technical debt grows.' },
-      { label: 'Strangler Fig pattern: gradually extract services', tag: 'devops', impact: { lead: -3, cfr: -2, cost: +20, sat: +4, burn: -3 }, note: 'Sustainable modernization with controlled risk.' },
-      { label: 'Big-bang rewrite of the entire payment system', tag: 'mixed', impact: { lead: +8, cfr: +12, cost: +45, sat: -8, burn: +10 }, note: 'High risk, high reward approach with major disruption.' }
-    ]
+      {
+        label: 'Continue extending the monolith with workarounds',
+        tag: 'nodevops',
+        impact: { lead: +5, cfr: +8, sat: -6, burn: +5, cost: -5 },
+        note: 'Cheaper short-term but technical debt grows.',
+      },
+      {
+        label: 'Strangler Fig pattern: gradually extract services',
+        tag: 'devops',
+        impact: { lead: -3, cfr: -2, cost: +20, sat: +4, burn: -3 },
+        note: 'Sustainable modernization with controlled risk.',
+      },
+      {
+        label: 'Big-bang rewrite of the entire payment system',
+        tag: 'mixed',
+        impact: { lead: +8, cfr: +12, cost: +45, sat: -8, burn: +10 },
+        note: 'High risk, high reward approach with major disruption.',
+      },
+    ],
   },
   {
     id: 'team-scaling',
     title: 'Engineering team doubled in size',
     text: 'You hired 15 new developers. Coordination is becoming chaotic and code conflicts are frequent.',
     choices: [
-      { label: 'Implement trunk-based development with feature flags', tag: 'devops', impact: { lead: -4, cfr: -6, cost: +15, sat: +8, burn: -4 }, note: 'Reduces merge conflicts and improves flow.' },
-      { label: 'Create separate teams with individual repositories', tag: 'mixed', impact: { lead: +2, cfr: +3, cost: +8, sat: -2, burn: +2 }, note: 'Reduces conflicts but may create silos.' },
-      { label: 'Establish code review gates and approval processes', tag: 'nodevops', impact: { lead: +6, cfr: -2, sat: -5, burn: +4, cost: +5 }, note: 'Quality control but slows down delivery.' }
-    ]
+      {
+        label: 'Implement trunk-based development with feature flags',
+        tag: 'devops',
+        impact: { lead: -4, cfr: -6, cost: +15, sat: +8, burn: -4 },
+        note: 'Reduces merge conflicts and improves flow.',
+      },
+      {
+        label: 'Create separate teams with individual repositories',
+        tag: 'mixed',
+        impact: { lead: +2, cfr: +3, cost: +8, sat: -2, burn: +2 },
+        note: 'Reduces conflicts but may create silos.',
+      },
+      {
+        label: 'Establish code review gates and approval processes',
+        tag: 'nodevops',
+        impact: { lead: +6, cfr: -2, sat: -5, burn: +4, cost: +5 },
+        note: 'Quality control but slows down delivery.',
+      },
+    ],
   },
   {
     id: 'compliance-audit',
     title: 'SOC 2 compliance audit approaching',
     text: 'Your startup needs SOC 2 certification. Auditors want evidence of security controls and change management.',
     choices: [
-      { label: 'Hire compliance consultants and manual documentation', tag: 'nodevops', impact: { cost: +40, lead: +4, sat: -6, burn: +8, cfr: +2 }, note: 'Expensive and doesn\'t improve actual security.' },
-      { label: 'Implement GitOps with audit trails and automated policies', tag: 'devops', impact: { cost: +25, lead: -2, cfr: -5, sat: +3, burn: -2 }, note: 'Compliance through better engineering practices.' },
-      { label: 'Document existing processes and add manual approvals', tag: 'mixed', impact: { cost: +15, lead: +3, sat: -3, burn: +3, cfr: +1 }, note: 'Meets compliance but adds bureaucracy.' }
-    ]
+      {
+        label: 'Hire compliance consultants and manual documentation',
+        tag: 'nodevops',
+        impact: { cost: +40, lead: +4, sat: -6, burn: +8, cfr: +2 },
+        note: "Expensive and doesn't improve actual security.",
+      },
+      {
+        label: 'Implement GitOps with audit trails and automated policies',
+        tag: 'devops',
+        impact: { cost: +25, lead: -2, cfr: -5, sat: +3, burn: -2 },
+        note: 'Compliance through better engineering practices.',
+      },
+      {
+        label: 'Document existing processes and add manual approvals',
+        tag: 'mixed',
+        impact: { cost: +15, lead: +3, sat: -3, burn: +3, cfr: +1 },
+        note: 'Meets compliance but adds bureaucracy.',
+      },
+    ],
   },
   {
     id: 'cloud-costs',
     title: 'Cloud costs increased 300% last quarter',
     text: 'AWS bill shows runaway compute and storage costs. Finance is demanding immediate action.',
     choices: [
-      { label: 'Immediately downsize instances to reduce costs', tag: 'nodevops', impact: { cost: -25, cfr: +10, sat: -8, mttr: +3, burn: +5 }, note: 'Quick savings but performance and reliability suffer.' },
-      { label: 'Implement FinOps with cost monitoring and right-sizing', tag: 'devops', impact: { cost: -15, lead: -1, sat: +4, burn: -2, cfr: -2 }, note: 'Sustainable cost optimization with better visibility.' },
-      { label: 'Negotiate reserved instances and annual contracts', tag: 'mixed', impact: { cost: -20, lead: +1, sat: +1, burn: +1, cfr: 0 }, note: 'Good savings but less flexibility for growth.' }
-    ]
+      {
+        label: 'Immediately downsize instances to reduce costs',
+        tag: 'nodevops',
+        impact: { cost: -25, cfr: +10, sat: -8, mttr: +3, burn: +5 },
+        note: 'Quick savings but performance and reliability suffer.',
+      },
+      {
+        label: 'Implement FinOps with cost monitoring and right-sizing',
+        tag: 'devops',
+        impact: { cost: -15, lead: -1, sat: +4, burn: -2, cfr: -2 },
+        note: 'Sustainable cost optimization with better visibility.',
+      },
+      {
+        label: 'Negotiate reserved instances and annual contracts',
+        tag: 'mixed',
+        impact: { cost: -20, lead: +1, sat: +1, burn: +1, cfr: 0 },
+        note: 'Good savings but less flexibility for growth.',
+      },
+    ],
   },
   {
     id: 'api-versioning',
     title: 'Breaking API changes needed for mobile app',
     text: 'The mobile team needs a new API version. Current API has performance issues but 50+ integrations depend on it.',
     choices: [
-      { label: 'Version the API and maintain both simultaneously', tag: 'devops', impact: { lead: -2, cost: +20, cfr: -4, sat: +6, burn: +3 }, note: 'Clean evolution path but maintenance overhead.' },
-      { label: 'Force all clients to migrate to new API at once', tag: 'nodevops', impact: { lead: +4, cfr: +15, sat: -10, burn: +8, cost: +10 }, note: 'Simplifies codebase but breaks existing integrations.' },
-      { label: 'Proxy pattern with gradual feature migration', tag: 'devops', impact: { lead: +1, cost: +15, cfr: -2, sat: +3, burn: +2 }, note: 'Smooth transition with controlled complexity.' }
-    ]
+      {
+        label: 'Version the API and maintain both simultaneously',
+        tag: 'devops',
+        impact: { lead: -2, cost: +20, cfr: -4, sat: +6, burn: +3 },
+        note: 'Clean evolution path but maintenance overhead.',
+      },
+      {
+        label: 'Force all clients to migrate to new API at once',
+        tag: 'nodevops',
+        impact: { lead: +4, cfr: +15, sat: -10, burn: +8, cost: +10 },
+        note: 'Simplifies codebase but breaks existing integrations.',
+      },
+      {
+        label: 'Proxy pattern with gradual feature migration',
+        tag: 'devops',
+        impact: { lead: +1, cost: +15, cfr: -2, sat: +3, burn: +2 },
+        note: 'Smooth transition with controlled complexity.',
+      },
+    ],
   },
   {
     id: 'on-call-fatigue',
     title: 'On-call engineers experiencing burnout',
     text: 'Your team gets paged 15+ times per week. Sleep deprivation is affecting code quality and team morale.',
     choices: [
-      { label: 'Hire more engineers to share on-call rotation', tag: 'nodevops', impact: { cost: +30, burn: -3, sat: +2, cfr: +3, mttr: +1 }, note: 'Reduces individual load but doesn\'t fix root causes.' },
-      { label: 'Implement SRE practices with SLA/SLI and error budgets', tag: 'devops', impact: { burn: -6, sat: +8, cfr: -8, mttr: -4, cost: +18 }, note: 'Systematic approach to reliability and alert quality.' },
-      { label: 'Reduce alert sensitivity to avoid false positives', tag: 'mixed', impact: { burn: -4, sat: +3, cfr: +5, mttr: +2, cost: +2 }, note: 'Less fatigue but may miss real issues.' }
-    ]
+      {
+        label: 'Hire more engineers to share on-call rotation',
+        tag: 'nodevops',
+        impact: { cost: +30, burn: -3, sat: +2, cfr: +3, mttr: +1 },
+        note: "Reduces individual load but doesn't fix root causes.",
+      },
+      {
+        label: 'Implement SRE practices with SLA/SLI and error budgets',
+        tag: 'devops',
+        impact: { burn: -6, sat: +8, cfr: -8, mttr: -4, cost: +18 },
+        note: 'Systematic approach to reliability and alert quality.',
+      },
+      {
+        label: 'Reduce alert sensitivity to avoid false positives',
+        tag: 'mixed',
+        impact: { burn: -4, sat: +3, cfr: +5, mttr: +2, cost: +2 },
+        note: 'Less fatigue but may miss real issues.',
+      },
+    ],
   },
   {
     id: 'data-pipeline',
     title: 'Analytics pipeline failing silently',
     text: 'Business discovers month-old data gaps in reports. The ETL process has been failing without notifications.',
     choices: [
-      { label: 'Add manual data validation checkpoints', tag: 'nodevops', impact: { cost: +12, burn: +6, sat: -2, cfr: +4, lead: +2 }, note: 'Human oversight but slow and error-prone.' },
-      { label: 'Implement data observability and automated testing', tag: 'devops', impact: { cost: +22, cfr: -6, mttr: -3, sat: +5, burn: -2 }, note: 'Prevents data quality issues proactively.' },
-      { label: 'Schedule periodic manual audits of data quality', tag: 'mixed', impact: { cost: +8, cfr: +2, sat: +1, burn: +2, mttr: -1 }, note: 'Catches issues but reactively.' }
-    ]
+      {
+        label: 'Add manual data validation checkpoints',
+        tag: 'nodevops',
+        impact: { cost: +12, burn: +6, sat: -2, cfr: +4, lead: +2 },
+        note: 'Human oversight but slow and error-prone.',
+      },
+      {
+        label: 'Implement data observability and automated testing',
+        tag: 'devops',
+        impact: { cost: +22, cfr: -6, mttr: -3, sat: +5, burn: -2 },
+        note: 'Prevents data quality issues proactively.',
+      },
+      {
+        label: 'Schedule periodic manual audits of data quality',
+        tag: 'mixed',
+        impact: { cost: +8, cfr: +2, sat: +1, burn: +2, mttr: -1 },
+        note: 'Catches issues but reactively.',
+      },
+    ],
   },
   {
     id: 'container-strategy',
     title: 'Microservices deployment complexity growing',
     text: 'You have 25 services across different environments. Deployments take hours and configuration drift is common.',
     choices: [
-      { label: 'Adopt Kubernetes with GitOps deployment patterns', tag: 'devops', impact: { lead: -5, cfr: -8, cost: +25, sat: +6, burn: +4 }, note: 'Powerful but complex platform with learning curve.' },
-      { label: 'Standardize on Docker Compose for all environments', tag: 'mixed', impact: { lead: -2, cfr: -3, cost: +8, sat: +2, burn: +1 }, note: 'Simpler but may not scale for complex needs.' },
-      { label: 'Continue with custom deployment scripts', tag: 'nodevops', impact: { lead: +3, cfr: +6, cost: +5, sat: -4, burn: +5 }, note: 'Familiar but increasingly brittle and error-prone.' }
-    ]
-  }
+      {
+        label: 'Adopt Kubernetes with GitOps deployment patterns',
+        tag: 'devops',
+        impact: { lead: -5, cfr: -8, cost: +25, sat: +6, burn: +4 },
+        note: 'Powerful but complex platform with learning curve.',
+      },
+      {
+        label: 'Standardize on Docker Compose for all environments',
+        tag: 'mixed',
+        impact: { lead: -2, cfr: -3, cost: +8, sat: +2, burn: +1 },
+        note: 'Simpler but may not scale for complex needs.',
+      },
+      {
+        label: 'Continue with custom deployment scripts',
+        tag: 'nodevops',
+        impact: { lead: +3, cfr: +6, cost: +5, sat: -4, burn: +5 },
+        note: 'Familiar but increasingly brittle and error-prone.',
+      },
+    ],
+  },
 ]
 
 // Load scenarios from localStorage or use defaults
@@ -452,7 +663,7 @@ const state = reactive({
   cfr: 30,
   cost: 100,
   log: [],
-  picks: []
+  picks: [],
 })
 
 const showIntro = ref(true)
@@ -466,7 +677,7 @@ const currentImpact = ref({})
 const pendingChoice = ref(null)
 
 const clamp = (v, min, max) => Math.max(min, Math.min(max, v))
-const fmt = (n) => Number.isInteger(n) ? n : n.toFixed(1)
+const fmt = (n) => (Number.isInteger(n) ? n : n.toFixed(1))
 
 const current = computed(() => scenarios[state.idx])
 const currentNumber = computed(() => state.idx + 1)
@@ -484,14 +695,16 @@ const score = computed(() => {
   const mttr = 100 - ((state.mttr - 1) / (72 - 1)) * 100
   const cfr = 100 - state.cfr
   const cost = 100 - ((state.cost - 50) / (400 - 50)) * 100
-  const s = (sat * 0.2 + burn * 0.2 + lead * 0.2 + mttr * 0.2 + cfr * 0.15 + cost * 0.05)
+  const s = sat * 0.2 + burn * 0.2 + lead * 0.2 + mttr * 0.2 + cfr * 0.15 + cost * 0.05
   return clamp(s, 0, 100)
 })
 
 function applyImpact(impact) {
-  const before = { ...state }
+  const _before = { ...state }
   for (const [k, delta] of Object.entries(impact)) {
-    if (k in state) state[k] += delta
+    if (k in state) {
+      state[k] += delta
+    }
   }
   state.sat = clamp(state.sat, 0, 100)
   state.burn = clamp(state.burn, 0, 100)
@@ -505,22 +718,22 @@ function onChoose(i) {
   const choice = current.value.choices[i]
   const align = choice.tag === 'devops' ? 'DevOps' : choice.tag === 'mixed' ? 'Hybrid' : 'No DevOps'
   const beforeState = { ...state }
-  
+
   // Store the choice but don't apply impact yet
   pendingChoice.value = choice
   selectedChoiceIndex.value = i
   pickedAlign.value = align
   pickedNote.value = choice.note
-  
+
   currentImpact.value = {
     choice: choice.label,
     align,
     note: choice.note,
     impact: choice.impact,
     before: beforeState,
-    after: null // Will be calculated when impact is applied
+    after: null, // Will be calculated when impact is applied
   }
-  
+
   choiceMade.value = true
 }
 
@@ -532,20 +745,20 @@ function closeImpactModal() {
   // Apply the impact when user confirms to continue
   if (pendingChoice.value) {
     applyImpact(pendingChoice.value.impact)
-    
+
     // Update the currentImpact with the actual after state
     currentImpact.value.after = { ...state }
-    
+
     // Add to picks history
-    state.picks.push({ 
-      idx: state.idx, 
-      title: current.value.title, 
-      align: pickedAlign.value 
+    state.picks.push({
+      idx: state.idx,
+      title: current.value.title,
+      align: pickedAlign.value,
     })
-    
+
     pendingChoice.value = null
   }
-  
+
   showImpactModal.value = false
   state.idx++
   choiceMade.value = false
@@ -597,7 +810,7 @@ function restart() {
 
 // Expose showIntro to parent component
 defineExpose({
-  showIntro
+  showIntro,
 })
 </script>
 
@@ -1079,7 +1292,7 @@ button.choice:disabled {
   .metric-cards {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .intro-title {
     font-size: 28px;
   }
