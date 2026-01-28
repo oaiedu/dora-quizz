@@ -41,22 +41,14 @@ watch([currentView, gameStarted], updateNavigation, { immediate: true })
 <template>
   <div class="app">
     <nav v-if="shouldShowNavigation" class="navigation">
-      <button 
-        @click="showGame" 
-        :class="{ active: currentView === 'game' }"
-      >
-        🎮 DevOps Game
-      </button>
-      <button 
-        @click="showManager" 
-        :class="{ active: currentView === 'manager' }"
-      >
+      <button :class="{ active: currentView === 'game' }" @click="showGame">🎮 DevOps Game</button>
+      <button :class="{ active: currentView === 'manager' }" @click="showManager">
         ⚙️ Manage Scenarios
       </button>
     </nav>
-    
-    <DevOpsChoiceGame 
-      v-if="currentView === 'game'" 
+
+    <DevOpsChoiceGame
+      v-if="currentView === 'game'"
       @game-started="onGameStarted"
       @game-restarted="onGameRestarted"
       @manage-scenarios="onManageScenarios"
