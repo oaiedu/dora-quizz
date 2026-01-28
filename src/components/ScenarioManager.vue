@@ -103,10 +103,10 @@
 
               <div class="choices-container">
                 <div class="choices-grid">
-                  <!-- DevOps Choices Column -->
+                  <!-- DevOps Choices Column (shown only when DevOps tab is active) -->
                   <div 
-                    class="choice-column devops-column" 
-                    :class="{ active: activeChoiceTab === 'devops' }"
+                    class="choice-column devops-column"
+                    v-if="activeChoiceTab === 'devops'"
                   >
                     <div class="column-header">
                       <h4>🚀 DevOps Choices</h4>
@@ -234,10 +234,10 @@
                     </div>
                   </div>
                   
-                  <!-- Traditional Choices Column -->
+                  <!-- Traditional Choices Column (shown only when Traditional tab is active) -->
                   <div 
-                    class="choice-column traditional-column" 
-                    :class="{ active: activeChoiceTab === 'traditional' }"
+                    class="choice-column traditional-column"
+                    v-if="activeChoiceTab === 'traditional'"
                   >
                     <div class="column-header">
                       <h4>🏢 Traditional Choices</h4>
@@ -1060,7 +1060,7 @@ loadFromLocalStorage()
 
 .choices-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
